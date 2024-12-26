@@ -21,7 +21,7 @@ class AgentResource extends Resource
 
     protected static ?string $navigationGroup = 'Access Control';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -32,6 +32,7 @@ class AgentResource extends Resource
                     ->maxLength(55),
                 Forms\Components\TextInput::make('email')
                     ->email()
+                    ->unique(Agent::class, 'email', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('mobile')
                     ->tel()
@@ -74,7 +75,9 @@ class AgentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

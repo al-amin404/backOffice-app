@@ -21,7 +21,7 @@ class StaffResource extends Resource
 
     protected static ?string $navigationGroup = 'Access Control';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 0;
 
     public static function form(Form $form): Form
     {
@@ -37,6 +37,7 @@ class StaffResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->unique(Staff::class, 'email', ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('mobile')
                     ->required()
@@ -106,7 +107,9 @@ class StaffResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

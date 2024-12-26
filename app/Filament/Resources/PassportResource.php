@@ -127,7 +127,7 @@ class PassportResource extends Resource
                                     'BMET Processing' => 'BMET Processing',
                                 ])
                                 ->native(false)
-                                ->default('Received'),
+                                ->required(),
                             Forms\Components\Textarea::make('note'),
                         ])
                         ->columns(2)
