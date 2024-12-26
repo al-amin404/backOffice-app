@@ -42,6 +42,8 @@ class BackofficePanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
+            ->brandLogo(fn () => view('filament.app.logo'))
+            ->brandLogoHeight('2rem')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -55,6 +57,13 @@ class BackofficePanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+            ])
+            ->navigationGroups([
+                'Services',
+                'Access Control',
             ]);
     }
 }
