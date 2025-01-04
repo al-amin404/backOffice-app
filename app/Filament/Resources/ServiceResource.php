@@ -29,6 +29,9 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Toggle::make('is_active')
+                    ->label('Web Visibility')
+                    ->default(true),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(100),
@@ -58,6 +61,8 @@ class ServiceResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')
                     ->searchable(),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Web Visibility'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
