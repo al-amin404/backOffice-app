@@ -30,6 +30,7 @@ class StaffResource extends Resource
                 Forms\Components\TextInput::make('staff_id')
                     ->prefix('LT')
                     ->required()
+                    ->unique(Staff::class, 'staff_id', ignoreRecord: true)
                     ->maxLength(36),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -87,7 +88,12 @@ class StaffResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('staff_id'),
+                Tables\Columns\TextColumn::make('staff_id')
+                    ->label('Staff ID')
+                    ->prefix('LT-'),
+                Tables\Columns\ImageColumn::make('photo')
+                    ->label('Image')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
@@ -107,6 +113,8 @@ class StaffResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()
+                    ->modalHeading(fn (Staff $record) => $record->name),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                 ])
