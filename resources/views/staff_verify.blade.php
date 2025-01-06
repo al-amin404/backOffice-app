@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="h-bottom">
-                        <img class="c-name h-7" src="{{asset('storage/uploads/limpid-name.svg')}}" alt="">
+                        <img class="c-name h-7" src="{{asset('storage/uploads/dark-limpid-name.svg')}}" alt="">
                     </div>
                 </div>
                 <div class="card-body">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="footer ml-auto mt-6 relative">
-                    <p class="text-xs text-right font-semibold">Limpid Travels<span class="font-extralight">&reg;</span></p>
+                    <p class="text-xs text-right font-semibold">Limpid Travels<sup class="font-extralight">&reg;</sup></p>
                     <p class="text-[10px] overline text-right">Authorized Signature</p>
                 </div>
             </div>
