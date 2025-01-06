@@ -43,8 +43,10 @@ class BackofficePanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
             ])
-            ->brandLogo(fn () => view('filament.app.logo'))
+            ->brandLogo(asset('storage/uploads/limpid-name.svg'))
+            ->darkModeBrandLogo(asset('storage/uploads/dark-limpid-name.svg'))
             ->brandLogoHeight('2rem')
+            ->favicon(asset('/favicon.ico'))
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
