@@ -36,6 +36,7 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->unique(User::class, 'email', ignoreRecord: true)
+                    ->hiddenOn('edit')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')
                     ->password()
