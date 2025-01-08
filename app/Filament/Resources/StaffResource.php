@@ -47,6 +47,7 @@ class StaffResource extends Resource
                 Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now())
+                    ->native(false)
                     ->closeOnDateSelection(),
                 Forms\Components\TextInput::make('designation')
                     ->required()
