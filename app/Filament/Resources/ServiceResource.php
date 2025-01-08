@@ -60,9 +60,8 @@ class ServiceResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')
+                    ->sortable()
                     ->searchable(),
-                Tables\Columns\ToggleColumn::make('is_active')
-                    ->label('Web Visibility'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -72,6 +71,7 @@ class ServiceResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
