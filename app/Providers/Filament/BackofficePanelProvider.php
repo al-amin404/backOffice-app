@@ -28,8 +28,11 @@ class BackofficePanelProvider extends PanelProvider
             ->id('backoffice')
             ->path('backoffice')
             ->login()
+            //->registration()
+            ->passwordReset()
+            ->emailVerification()
             ->spa()
-            //->profile()
+            ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Orange,
             ])
