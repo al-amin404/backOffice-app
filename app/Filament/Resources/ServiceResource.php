@@ -31,7 +31,7 @@ class ServiceResource extends Resource
             ->schema([
                 Forms\Components\Toggle::make('is_active')
                     ->label('Web Visibility')
-                    ->default(true),
+                    ->default(false),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(100),
@@ -43,6 +43,10 @@ class ServiceResource extends Resource
                     ->required()
                     ->maxLength(9),
                 Forms\Components\TextInput::make('category')
+                    ->datalist([
+                        'Visa Processing',
+                        'BMET Manpower Processing',
+                    ])
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
