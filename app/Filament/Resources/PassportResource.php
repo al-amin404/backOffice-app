@@ -172,7 +172,11 @@ class PassportResource extends Resource
                             ->required()
                             ->relationship('service', 'title')
                             ->searchable()
-                            ->preload(),
+                            ->preload()
+                            ->datalist([
+                                'Visa Processing',
+                                'Manpower Processing',
+                            ]),
                         Forms\Components\Select::make('country')
                             ->required()
                             ->searchable()
@@ -242,7 +246,12 @@ class PassportResource extends Resource
                     Forms\Components\FileUpload::make('passport_photo')
                     ->image()
                     ->openable()
-                    ->directory('passports'),
+                    ->directory('passports')
+                    ->imageEditor()
+                    ->maxSize(2048)
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('580')
+                    ->imageResizeTargetHeight('800'),
                 ])
                 ->columns(2)
                 ->columnSpan(['lg' => 2]),
