@@ -32,7 +32,7 @@ class BackofficePanelProvider extends PanelProvider
             ->passwordReset()
             ->emailVerification()
             ->spa()
-            ->profile(isSimple: false)
+            //->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Orange,
             ])
