@@ -172,11 +172,7 @@ class PassportResource extends Resource
                             ->required()
                             ->relationship('service', 'title')
                             ->searchable()
-                            ->preload()
-                            ->datalist([
-                                'Visa Processing',
-                                'Manpower Processing',
-                            ]),
+                            ->preload(),
                         Forms\Components\Select::make('country')
                             ->required()
                             ->searchable()
