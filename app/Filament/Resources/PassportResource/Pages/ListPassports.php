@@ -45,6 +45,9 @@ class ListPassports extends ListRecords
             'BMET Processing' => Tab::make()
                                         ->query(fn ($query) => $query->where('status', 'BMET Processing'))
                                         ->badge(fn () => ($count = Passport::where('status', 'BMET Processing')->count()) ? $count : null),
+            'Process Done' => Tab::make()
+                                        ->query(fn ($query) => $query->where('status', 'Process Done'))
+                                        ->badge(fn () => ($count = Passport::where('status', 'Process Done')->count()) ? $count : null),
         ];
     }
 }
