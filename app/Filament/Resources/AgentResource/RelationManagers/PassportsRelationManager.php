@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\AgentResource\RelationManagers;
 
-use App\Filament\Resources\PassportResource;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Passport;
@@ -10,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Squire\Models\Country;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\PassportResource;
+use App\Filament\Resources\PassportResource\Pages\EditPassport;
 use Filament\Forms\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -131,10 +132,10 @@ class PassportsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
-                    //->prefix(fn(Passport $record) => $record->id . '. ')
                     ->wrap(true),
                 Tables\Columns\TextColumn::make('passport')
-                    ->searchable(),
+                    ->searchable()
+                    ->copyable(),
                 Tables\Columns\TextColumn::make('mobile')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('service.title')
@@ -184,6 +185,9 @@ class PassportsRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->recordUrl(function($record) {
+                return EditPassport::getUrl([$record->id]);
+            });
     }
 }
