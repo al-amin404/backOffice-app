@@ -60,10 +60,11 @@ class PassportResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(isIndividual: true)
                     ->sortable()
-                    //->prefix(fn(Passport $record) => $record->id . '. ')
+                    ->copyable()
                     ->wrap(true),
                 Tables\Columns\TextColumn::make('passport')
-                    ->searchable(isIndividual: true),
+                    ->searchable(isIndividual: true)
+                    ->copyable(),
                 Tables\Columns\TextColumn::make('mobile')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('service.title')
@@ -115,6 +116,9 @@ class PassportResource extends Resource
                 // ]),
             ])
             ->defaultSort('id', 'desc');
+            // ->recordUrl(function($record) {
+            //     return Pages\ViewPassport::getUrl([$record->id]);
+            // });
     }
 
     public static function getRelations(): array
