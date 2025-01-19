@@ -35,8 +35,9 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->required()
+                    ->fileAttachmentsDirectory('services')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
