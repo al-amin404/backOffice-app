@@ -15,6 +15,7 @@ use App\Filament\Resources\PassportResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PassportResource\RelationManagers;
 use App\Models\Agent;
+use Filament\Tables\Enums\ActionsPosition;
 
 class PassportResource extends Resource
 {
@@ -55,6 +56,7 @@ class PassportResource extends Resource
             ->searchable(false)
             ->columns([
                 Tables\Columns\TextColumn::make('id')
+                    ->width('40px')
                     ->label('SL.')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
@@ -73,7 +75,7 @@ class PassportResource extends Resource
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('country')
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('reference')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('agent.name')
@@ -96,20 +98,21 @@ class PassportResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updatedBy.name')
                     ->label('Updated by')
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->searchOnBlur()
+            ->recordUrl(null)
+            ->recordAction(null)
             ->filters([
                 //
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make()
-                //     ->modalHeading(fn (Passport $record) => $record->name),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])
                 ->tooltip('Actions')
-            ])
+                ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
