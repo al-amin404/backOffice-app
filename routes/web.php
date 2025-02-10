@@ -11,4 +11,4 @@ Route::get('/', function () {
 Route::get('staff/{staff_id}', function ($staff_id) {
     $staff = Staff::where('staff_id', $staff_id)->first();
     return view('staff_verify', compact('staff'));
-});
+})->name('staffID');

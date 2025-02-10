@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\StaffResource\Pages;
 
-use App\Filament\Resources\StaffResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\StaffResource;
 
 class EditStaff extends EditRecord
 {
@@ -13,6 +14,13 @@ class EditStaff extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+
+            Action::make('View ID')
+                ->label('View ID')
+                ->icon('heroicon-o-identification')
+                ->url(fn($record) => route('staffID', ['staff_id' => $record->staff_id]))
+                ->openUrlInNewTab(),
+
             Actions\DeleteAction::make(),
         ];
     }

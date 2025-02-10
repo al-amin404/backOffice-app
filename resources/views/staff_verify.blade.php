@@ -23,7 +23,7 @@
 
     <body>
         <div class="card-container flex justify-center items-center w-full h-screen bg-slate-900">
-            <div class="card w-64 h-max p-3 pb-3 bg-slate-800 text-white shadow-lg shadow-black rounded-xl overflow-hidden relative">
+            <div class="card w-[264px] h-max p-3 pb-3 bg-slate-800 text-white shadow-lg shadow-black rounded-xl overflow-hidden relative">
                 <img class="absolute scale-[1.8] top-[30%] -left-[67%] opacity-15 -z-0" src="{{asset('storage/uploads/limpid-logo.svg')}}" alt="">
                 <div class="card-header flex flex-col gap-y-4">
                     <div class="h-top flex flex-row justify-between items-center">
