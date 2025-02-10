@@ -104,19 +104,22 @@ class PassportResource extends Resource
             ->recordUrl(null)
             ->recordAction(null)
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
-                ])
-                ->tooltip('Actions')
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->hidden(fn($record) => $record->trashed()),
+                Tables\Actions\RestoreAction::make()
+                    ->iconButton(),
+                // Tables\Actions\ActionGroup::make([
+                //     Tables\Actions\EditAction::make(),
+                //     Tables\Actions\DeleteAction::make(),
+                // ])
+                // ->tooltip('Actions')
                 ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\ForceDeleteBulkAction::make(),
             ])
             ->defaultSort('id', 'desc');
             // ->recordUrl(function($record) {
