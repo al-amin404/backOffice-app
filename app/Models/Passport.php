@@ -6,9 +6,11 @@ use Squire\Models\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Passport extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'passport',
