@@ -188,6 +188,7 @@ class PassportsRelationManager extends RelationManager
             ])
             ->recordUrl(function($record) {
                 return EditPassport::getUrl([$record->id]);
-            });
+            })
+            ->defaultSort('id', 'desc');
     }
 }
