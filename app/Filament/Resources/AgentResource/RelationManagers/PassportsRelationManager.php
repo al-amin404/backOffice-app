@@ -11,6 +11,7 @@ use Squire\Models\Country;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PassportResource;
 use App\Filament\Resources\PassportResource\Pages\EditPassport;
+use App\Filament\Resources\PassportResource\Pages\ViewPassport;
 use Filament\Forms\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -132,6 +133,7 @@ class PassportsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
+                    ->copyable()
                     ->wrap(true),
                 Tables\Columns\TextColumn::make('passport')
                     ->searchable()
@@ -152,7 +154,8 @@ class PassportsRelationManager extends RelationManager
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('rlNumber')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
@@ -187,7 +190,7 @@ class PassportsRelationManager extends RelationManager
                 ]),
             ])
             ->recordUrl(function($record) {
-                return EditPassport::getUrl([$record->id]);
+                return ViewPassport::getUrl([$record->id]);
             })
             ->defaultSort('id', 'desc');
     }
