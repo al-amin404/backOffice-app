@@ -83,7 +83,8 @@ class PassportResource extends Resource
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('rlNumber')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
@@ -140,6 +141,7 @@ class PassportResource extends Resource
             'index' => Pages\ListPassports::route('/'),
             'create' => Pages\CreatePassport::route('/create'),
             'edit' => Pages\EditPassport::route('/{record}/edit'),
+            'view' => Pages\ViewPassport::route('/{record}'),
         ];
     }
 
