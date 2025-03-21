@@ -70,7 +70,8 @@ class AgentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(isIndividual: true),
+                    ->searchable(isIndividual: true)
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
@@ -115,6 +116,7 @@ class AgentResource extends Resource
             'index' => Pages\ListAgents::route('/'),
             'create' => Pages\CreateAgent::route('/create'),
             'edit' => Pages\EditAgent::route('/{record}/edit'),
+            'view' => Pages\ViewAgent::route('/{record}'),
         ];
     }
 }
