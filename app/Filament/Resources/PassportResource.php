@@ -59,9 +59,10 @@ class PassportResource extends Resource
                     ->width('40px')
                     ->label('SL.')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(isIndividual: true)
-                    ->sortable()
+                Tables\Columns\TextColumn::make('full_name')
+                    ->label('Name')
+                    ->searchable(['first_name', 'last_name'], isIndividual: true)
+                    ->sortable(['first_name'])
                     ->copyable()
                     ->wrap(true),
                 Tables\Columns\TextColumn::make('passport')
@@ -82,8 +83,9 @@ class PassportResource extends Resource
                     ->searchable(isIndividual: true)
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: false),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable()
+                Tables\Columns\SelectColumn::make('status')
+                    ->options(static::passportsStatusOptions())
+                    ->default('Received')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('rlNumber')
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -156,18 +158,22 @@ class PassportResource extends Resource
                     ->hidden(fn (?Passport $record) => $record === null)
                     ->disabled(fn (?Passport $record) => $record !== null)
                     ->columnSpanFull(),
-                    Forms\Components\TextInput::make('name')
+                    Forms\Components\TextInput::make('first_name')
+                        ->extraInputAttributes(['onChange' => 'this.value = this.value.toUpperCase()'])
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('last_name')
                         ->required()
-                        ->autocapitalize('words')
+                        ->extraInputAttributes(['onChange' => 'this.value = this.value.toUpperCase()'])
                         ->maxLength(255),
                     Forms\Components\TextInput::make('passport')
                         ->label('Passport No.')
                         ->required()
-                        ->autocapitalize('characters')
+                        ->extraInputAttributes(['onChange' => 'this.value = this.value.toUpperCase()'])
                         ->maxLength(9),
                     Forms\Components\TextInput::make('mobile')
                         ->required()
                         ->tel()
+                        ->inputMode('decimal')
                         ->maxLength(11),
                     Forms\Components\DatePicker::make('date_of_birth')
                         ->required()
@@ -207,23 +213,8 @@ class PassportResource extends Resource
                         }),
                             
                         Forms\Components\Select::make('status')
-                            ->options([
-                                'Received' => 'Received',
-                                'On-hold' => 'On-hold',
-                                'Processing' => 'Processing',
-                                'Process Done' => 'Process Done',
-                                'Medical Done' => 'Medical Done',
-                                'GCC Fit' => 'GCC Fit',
-                                'Mofa Done' => 'Mofa Done',
-                                'Fingerprint Done' => 'Fingerprint Done',
-                                'Sent for Embassy' => 'Sent for Embassy',
-                                'Visa Issued' => 'Visa Issued',
-                                'BMET Processing' => 'BMET Processing',
-                                'Delivered' => 'Delivered',
-                                'Failed' => 'Failed',
-                                'Failed & Returned' => 'Failed & Returned',
-                                
-                            ])
+                            ->options(static::passportsStatusOptions())
+                            ->default('Received')
                             ->native(false)
                             ->required(),
                         Forms\Components\Textarea::make('note')
@@ -263,6 +254,27 @@ class PassportResource extends Resource
                 ])
                 ->columns(2)
                 ->columnSpan(['lg' => 2]),
+        ];
+    }
+
+    public static function passportsStatusOptions(): array
+    {
+        return [
+            'Received' => 'Received',
+            'On-hold' => 'On-hold',
+            'Processing' => 'Processing',
+            'Process Done' => 'Process Done',
+            'Medical Done' => 'Medical Done',
+            'GCC Fit' => 'GCC Fit',
+            'Mofa Done' => 'Mofa Done',
+            'Fingerprint Done' => 'Fingerprint Done',
+            'Sent for Embassy' => 'Sent for Embassy',
+            'Visa Issued' => 'Visa Issued',
+            'BMET Processing' => 'BMET Processing',
+            'Delivered' => 'Delivered',
+            'Failed' => 'Failed',
+            'Failed & Returned' => 'Failed & Returned',
+
         ];
     }
 

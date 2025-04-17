@@ -12,7 +12,8 @@ class Passport extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'passport',
         'mobile',
         'date_of_birth',
@@ -54,6 +55,25 @@ class Passport extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = strtoupper($value);
+    }
+
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = strtoupper($value);
+    }
+
+    public function setPassportAttribute($value)
+    {
+        $this->attributes['passport'] = strtoupper($value);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 
     protected static function boot()
     {

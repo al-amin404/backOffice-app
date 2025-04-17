@@ -130,18 +130,17 @@ class PassportsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('id')
                     ->label('SL.')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable()
+                Tables\Columns\TextColumn::make('full_name')
+                    ->label('Name')
+                    ->searchable(['first_name', 'last_name'], isIndividual: true)
+                    ->sortable(['first_name'])
                     ->copyable()
                     ->wrap(true),
                 Tables\Columns\TextColumn::make('passport')
                     ->searchable()
                     ->copyable(),
-                Tables\Columns\TextColumn::make('mobile')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('mobile'),
                 Tables\Columns\TextColumn::make('service.title')
-                    ->searchable()
                     ->sortable()
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -150,11 +149,9 @@ class PassportsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('reference')
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('agent.name')
-                    ->searchable()
                     ->wrap(true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('rlNumber')
                     ->toggleable(isToggledHiddenByDefault: true),
